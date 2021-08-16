@@ -1,9 +1,9 @@
 ![image](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
 ![image](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![image](https://img.shields.io/github/repo-size/ikaroamorim/promobit-movies)
-[![image](https://img.shields.io/github/last-commit/ikaroamorim/Podcastr)](https://github.com/ikaroamorim/promobit-movies/commits/master)
+[![image](https://img.shields.io/github/last-commit/ikaroamorim/promobit-movies)](https://github.com/ikaroamorim/promobit-movies/commits/master)
 ![image](https://img.shields.io/badge/license-MIT-brightgreen)
-[![image](https://img.shields.io/github/stars/ikaroamorim/Podcastr?style=social)](https://github.com/ikaroamorim/promobit-movies/stargazers)
+[![image](https://img.shields.io/github/stars/ikaroamorim/promobit-movies?style=social)](https://github.com/ikaroamorim/promobit-movies/stargazers)
 
 <h1 align="center">Promobit Movies</h1>
 
@@ -51,7 +51,6 @@ $ yarn dev
 
 As seguintes ferramentas foram usadas na construção do projeto:
 
-- [Node.js](https://nodejs.org/en/)
 - [React](https://pt-br.reactjs.org/)
 - [Next.js](https://nextjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
@@ -60,7 +59,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 <a name="autor"></a>
 ## 👨‍💻 Autor
 <a href="https://www.linkedin.com/in/ikaroamorimesilva/">
- <img style="border-radius: 50%;" src="https://github.com/ikaroamorim.png" width="100px;" alt=""/>
+ <img style="borderRadius: 50%;" src="https://github.com/ikaroamorim.png" width="100px;" alt=""/>
  <br />
  <sub><b>Ikaro Amorim e Silva</b></sub>
  </a>

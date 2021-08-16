@@ -74,20 +74,32 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
    const { slug } = params;
 
+   try {
+      const responseDetails = await api.get(`movie/${slug}`, {
+         params: {
+            api_key: '3035934e587a656dcf1c327b5ec0779f',
+            language: 'pt-BR',
+         }
+      });
 
-   const responseDetails = await api.get(`movie/${slug}`, {
-      params: {
-         api_key: '3035934e587a656dcf1c327b5ec0779f',
-         language: 'pt-BR',
+      const dataDetails: IMovieDetail = await responseDetails.data;
+
+      return {
+         props: {
+            details: dataDetails
+         },
+         revalidate: 60 * 60 * 24 * 7 //7 dias
       }
-   });
+   } catch (error) {
+      console.error(error)
 
-   const dataDetails: IMovieDetail = await responseDetails.data;
+      return {
+         props: {
+            details: []
+         },
+         revalidate: 60 * 60 * 1 //Uma Hora
+      }
 
-   return {
-      props: {
-         details: dataDetails
-      },
-      revalidate: 60 * 60 * 24 * 7
    }
+
 }
