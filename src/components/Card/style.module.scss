@@ -1,0 +1,28 @@
+.container {
+   margin : 1rem;
+   border : 1px solid #ccc;
+   display: flex;
+   width  : 420px;
+   cursor : pointer;
+
+   .cardInfo {
+      background-color: #fff;
+      padding         : 10px;
+      width           : 350px;
+
+      h4 {
+         margin: 15px 0;
+      }
+
+      p {
+         margin: 10px 0;
+         color : #666;
+
+         svg {
+            color      : var(--headerYellow);
+            padding-top: 3px;
+            font-size  : 18px;
+         }
+      }
+   }
+}

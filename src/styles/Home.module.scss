@@ -1,16 +1,67 @@
-.container{
-   height: calc(100vh - 60px);
+.container {
+   height : calc(100vh - 60px);
    display: flex;
 
-   aside{
-      height: 100%;
-      width: 200px;
+   aside {
+      height   : 100%;
+      width    : 200px;
       flex-grow: 0;
+      overflow : auto;
+
+      h3 {
+         padding: 20px 5px;
+         color  : var(--mainTextColor);
+      }
+
+      .checkboxContainer {
+         padding         : 5px;
+         margin          : 0 0 0.5rem 0.5rem;
+         border-left     : 3px solid var(--headerYellow);
+         background-color: var(--backgroundColor);
+         border-radius   : 3px;
+         transition      : filter 0.5s;
+         cursor          : pointer;
+
+
+         &:hover {
+            filter: brightness(0.9)
+         }
+
+         input {
+            margin: 0 0.25rem;
+         }
+      }
    }
 
-   main{
-      height: 100%;
+   main {
+      height  : 100%;
       overflow: auto;
-      flex: 1;
+      flex    : 1;
+
+      h2 {
+         margin: 40px 40px;
+         color : var(--mainTextColor);
+      }
+
+      .cardsContainer {
+         display        : flex;
+         flex-wrap      : wrap;
+         justify-content: center;
+
+      }
+
+      .buttonsContainer {
+         margin    : 10px auto 20px auto;
+         text-align: center;
+
+         button {
+            background-color: var(--buttonBlue);
+            color           : white;
+            padding         : 5px;
+            margin          : 0 10px;
+            border          : 0;
+            border-radius   : 3px;
+         }
+      }
    }
 }

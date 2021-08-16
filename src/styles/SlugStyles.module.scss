@@ -1,0 +1,53 @@
+.container {
+   max-width: 800px;
+   margin   : 0 auto;
+
+
+   .imgContainer {
+      margin    : 10px auto;
+      text-align: center;
+   }
+
+   .infoContainer {
+      text-align: center;
+      max-width : 800px;
+      position  : relative;
+
+      a {
+         font-size: 20px;
+         color    : var(--buttonBlue);
+
+         &:first-child {
+            position: absolute;
+            right   : 0;
+         }
+
+      }
+
+      h3 {
+         margin: 15px 0 10px 0;
+      }
+
+      p {
+         color: var(--mainTextColor);
+      }
+
+      .budgetContainer {
+         display        : flex;
+         flex-wrap      : wrap;
+         justify-content: space-around;
+      }
+
+      .genreContainer {
+         padding: 20px;
+
+         .genreButton {
+            color           : white;
+            background-color: var(--buttonBlue);
+            margin          : 15px 5px;
+            padding         : 10px;
+            border-radius   : 4px;
+         }
+      }
+   }
+}

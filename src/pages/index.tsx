@@ -1,5 +1,6 @@
 import type { GetStaticProps } from 'next';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
 
 import { IHomeProps } from '../types/IHomeProps'
 import { IMovie } from '../types/IMovie'
@@ -9,29 +10,52 @@ import styles from '../styles/Home.module.scss'
 
 import { api } from '../services/api'
 import axios, { AxiosResponse } from 'axios'
-import { useState } from 'react';
+
+import { Card } from '../components/Card'
 
 const Home = (props: IHomeProps) => {
-  
   const [filter, setFilter] = useState<number[]>([]);
-  console.log(filter);
+  const [items, setItems] = useState<IMovie[]>([...props.movies])
+  const [page, setPage] = useState<number>(1)
+
+  const numOfCards = items.length;
+  const numOfPages = parseInt((numOfCards / 15).toString(), 10) + (numOfCards % 15 > 0 ? 1 : 0)
+  const nextPage = () => setPage(page + 1);
+  const prevPage = () => setPage(page - 1);
+
+  useEffect(() => filterItems(filter), [filter])
+
+  function filterItems(filter: number[]) {
+    if (filter.length > 0) {
+      const filteredMovies = props.movies.filter((movie) => {
+        let control = 0;
+        movie.genre_ids.forEach((genre) => {
+          if (filter.includes(genre)) { control++ }
+          return filter.includes(genre)
+        })
+        return control > 0
+      })
+      setItems([...filteredMovies]);
+    } else {
+      setItems([...props.movies])
+    }
+  }
+
 
   // @ts-ignore
-  function handleCheckboxChange(event, itemId:number) {
+  function handleCheckboxChange(event, itemId: number) {
     const value = !event.target.checked;
-    console.log('Event', event.target.checked)
 
     const stateValue = [...filter]
 
-    if(value){
-      let index =stateValue.indexOf(itemId)
+    if (value) {
+      let index = stateValue.indexOf(itemId)
       stateValue.splice(index, 1)
-    }else{
+    } else {
       stateValue.push(itemId)
     }
 
     setFilter(stateValue)
-
   }
 
 
@@ -51,13 +75,15 @@ const Home = (props: IHomeProps) => {
         <h3>Filtros:</h3>
         {props.genres.map(item => {
           return (
-            <div key={item.id}>
+            <div
+              key={item.id}
+              className={styles.checkboxContainer}>
               <input
                 type="checkbox"
                 name={item.name}
                 id={`${item.id}`}
                 checked={filter.indexOf(item.id) === -1 ? false : true}
-                onChange={ (event)=>{ handleCheckboxChange(event, item.id)}}
+                onChange={(event) => { handleCheckboxChange(event, item.id) }}
               />
               <label htmlFor={`${item.id}`}>{item.name}</label>
             </div>
@@ -66,13 +92,33 @@ const Home = (props: IHomeProps) => {
       </aside>
       <main>
 
-        <h2> Filmes Populares:</h2>
+        <h2> Filmes Populares do Dia:</h2>
 
-        {props.movies.map((item, id) => {
-          return (
-            <h3 key={id}> {item.title}</h3>
-          )
-        })}
+        <div className={styles.cardsContainer}>
+          {items
+            .slice((page - 1) * 15, (page - 1) * 15 + 15)
+            .map((item, id) => {
+              return (
+                <Card movie={item} key={id}></Card>
+              )
+            })}
+        </div>
+
+        <div className={styles.buttonsContainer}>
+          <button
+            onClick={prevPage}
+            disabled={page === 1}>
+            Página Anterior
+          </button>
+          <span>Página {page} de {numOfPages}</span>
+          <button
+            onClick={nextPage}
+            disabled={page === numOfPages}>
+            Próxima Página
+          </button>
+
+        </div>
+
 
       </main>
     </div>
@@ -124,6 +170,7 @@ export const getStaticProps: GetStaticProps = async () => {
     const responseGenre = await api.get('genre/movie/list', {
       params: {
         api_key: '3035934e587a656dcf1c327b5ec0779f',
+        language: 'pt-BR',
       }
     });
     const dataGenre: IGenre[] = await responseGenre.data.genres;

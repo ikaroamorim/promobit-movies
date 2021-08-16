@@ -4,11 +4,32 @@
   margin    : 0;
 }
 
-:root{
-  --white: #fff;
+:root {
+  --white          : #fff;
   --backgroundColor: #f3f5f5;
-  --headerYellow: #faba01;
+  --headerYellow   : #faba01;
+  --buttonBlue     : #008ae1;
+  --mainTextColor  : #607d8b;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background   : #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background   : #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 
 html,
 body {
@@ -24,18 +45,21 @@ a {
   text-decoration: none;
 }
 
-body, input, textarea, button{
+body,
+input,
+textarea,
+button {
   font: 500 1rem sans-serif;
 }
 
-h1{
+h1 {
   font-size: 2rem;
 }
 
-h2{
+h2 {
   font-size: 1.5rem;
 }
 
-button{
+button {
   cursor: pointer;
 }
