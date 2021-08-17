@@ -7,11 +7,12 @@ export function Header() {
 
    return (
       <header className={styles.main}>
-         <Link href="/">
+         <Link href="/" passHref>
             <div className={styles.logoContainer}>
                <Image
+                  width={276}
                   height={50}
-                  objectFit={'scale-down'}
+                  objectFit={'contain'}
                   src={logoPromobit}
                   alt="Site Logo"
                >

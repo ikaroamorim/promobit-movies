@@ -13,17 +13,23 @@ import axios, { AxiosResponse } from 'axios'
 
 import { Card } from '../components/Card'
 
+import { BiSearchAlt } from 'react-icons/bi'
+import { BsArrowBarLeft } from 'react-icons/bs'
+
 const Home = (props: IHomeProps) => {
   const [filter, setFilter] = useState<number[]>([]);
   const [items, setItems] = useState<IMovie[]>([...props.movies])
   const [page, setPage] = useState<number>(1)
+  const [isSearchPannelVisible, setIsSearchPannelVisible] = useState<boolean>(false)
 
   const numOfCards = items.length;
   const numOfPages = parseInt((numOfCards / 15).toString(), 10) + (numOfCards % 15 > 0 ? 1 : 0)
   const nextPage = () => setPage(page + 1);
   const prevPage = () => setPage(page - 1);
+  const toggleSearchPanel = () => { setIsSearchPannelVisible(!isSearchPannelVisible) }
 
-  useEffect(() => filterItems(filter), [filter])
+  useEffect(() => { filterItems(filter) }, [filter])
+
 
   function filterItems(filter: number[]) {
     if (filter.length > 0) {
@@ -71,8 +77,13 @@ const Home = (props: IHomeProps) => {
         <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png"></link>
         <link rel="icon" type="image/png" sizes="194x194" href="/assets/favicon-194x194.png"></link>
       </Head>
-      <aside>
-        <h3>Filtros:</h3>
+      <aside style={isSearchPannelVisible ? {} : { width: '0' }}>
+        <div className={styles.asideTopContainer}>
+          <h3>Filtros:</h3>
+          <button onClick={toggleSearchPanel}>
+            <BsArrowBarLeft />
+          </button>
+        </div>
         {props.genres.map(item => {
           return (
             <div
@@ -92,7 +103,14 @@ const Home = (props: IHomeProps) => {
       </aside>
       <main>
 
-        <h2> Filmes Populares do Dia:</h2>
+        <div className={styles.topContainer}>
+          <div>
+            <button
+              onClick={toggleSearchPanel}
+              style={isSearchPannelVisible ? { display: 'none' } : {}}><BiSearchAlt /></button>
+          </div>
+          <h2> Filmes Populares do Dia:</h2>
+        </div>
 
         <div className={styles.cardsContainer}>
           {items
@@ -133,6 +151,8 @@ export const getStaticProps: GetStaticProps = async () => {
     /**
      * Criando uma Array de promises para as requisições
      * e realizando as consultas
+     * Foi escolhido trazer 200 resultados, ou seja 10 consultas
+     * porém poderia ser utilizada função recursiva para trazer todos os resultados
      */
     const requestArray: Promise<AxiosResponse<any>>[] = [];
 

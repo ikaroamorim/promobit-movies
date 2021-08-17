@@ -30,7 +30,7 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 [Git](https://git-scm.com)
 [Node 12.0+](https://nodejs.org/en/)
 
-### Instalação e execução em Dev
+### Instalação e execução em Local
 
 ```bash
 # Clone este repositório
@@ -41,9 +41,13 @@ $ cd promobit-movies
 
 # Instale as dependências (utilizando yarn, mas pode também ser utilizado o npm)
 $ yarn install
+ou 
+$ npm install
 
 # Execute a aplicação em modo de desenvolvimento
 $ yarn dev
+ou 
+$ npm run dev
 ```
 
 <a name="tecnologias"></a>
